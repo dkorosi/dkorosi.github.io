@@ -14,7 +14,12 @@
             <a-marker preset="hiro">
                 <!-- raw.githack.com serves raw files directly from GitHub,
                 with proper Content-Type headers -->
-				<a-video src="#avocado_video" width="16" height="9" position="0 1 0"></a-video>
+			    <a-entity
+                position="0 1 0"
+                scale="20 20 20"
+                gltf-model="#avocado"
+                ></a-entity>
+				<a-video src="#avocado_video" width="16" height="9" position="0 2 0"></a-video>
             </a-marker>
 
             <!-- add a camera to the scene that renders the objects for us -->
