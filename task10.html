@@ -9,26 +9,60 @@
   <!-- this part defines the playback / control function and events -->
   <script>
     var markerFound = 0;
+	var markerType = 3;
     AFRAME.registerComponent('button', {
         init: function ()
         {
           var elem = document.documentElement;
           var marker = document.querySelector("#marker");
+		  var marker = document.querySelector("#marker1");
+		  var marker = document.querySelector("#marker2");
           var fullbutton = document.querySelector("#fullscreen");
           var Video_0 = document.querySelector("#Video_Asset_0");
+		  var Video_1 = document.querySelector("#Video_Asset_1");
+		  var Video_2 = document.querySelector("#Video_Asset_2");
           var button = document.querySelector("#mutebutton");
           button.hidden = true;
           Video_0.pause();
+		  Video_1.pause();
+		  Video_2.pause();
 
           marker.addEventListener("markerFound", function (evt) {
             markerFound = 1;
+			markerType = 0;
             button.hidden = false;
-            // Video_0.play();  // if you want the video 
-            // to start immediently on marker detection, uncomment this
+          
           });
 
           marker.addEventListener("markerLost", function (evt) {
             markerFound = 0;
+			markerType = 3;
+            Video_0.pause();
+            button.hidden = true;
+          });
+		  marker1.addEventListener("markerFound", function (evt) {
+            markerFound = 1;
+			markerType = 1;
+            button.hidden = false;
+           
+          });
+
+          marker1.addEventListener("markerLost", function (evt) {
+            markerFound = 0;
+			markerType = 3;
+            Video_0.pause();
+            button.hidden = true;
+          });
+		  marker2.addEventListener("markerFound", function (evt) {
+            markerFound = 1;
+			markerType = 2;
+            button.hidden = false;
+           
+          });
+
+          marker2.addEventListener("markerLost", function (evt) {
+            markerFound = 0;
+			markerType = 3;
             Video_0.pause();
             button.hidden = true;
           });
@@ -36,7 +70,8 @@
           // button for video play/pause
           button.addEventListener("click", function(evt){
             console.log("button clicked")
-            if(Video_0.muted==true){
+			switch(markerType){
+			case(0):{if(Video_0.muted==true){
               button.innerHTML="Pause";
               Video_0.muted=false;
               Video_0.play();
@@ -45,7 +80,30 @@
               Video_0.muted=true;
               Video_0.pause();
             }
-          });
+			} break;
+			case(1):{if(Video_1.muted==true){
+              button.innerHTML="Pause";
+              Video_1.muted=false;
+              Video_1.play();
+            }else{
+              button.innerHTML="Play";
+              Video_1.muted=true;
+              Video_1.pause();
+            }
+			} break;
+			case(2):{if(Video_2.muted==true){
+              button.innerHTML="Pause";
+              Video_2.muted=false;
+              Video_2.play();
+            }else{
+              button.innerHTML="Play";
+              Video_2.muted=true;
+              Video_2.pause();
+            }
+			} break;
+            
+          }
+		  );
 
           // button for full screen
           fullbutton.addEventListener("click",
@@ -101,8 +159,20 @@
     <a-assets>
       <video id="Video_Asset_0" autoplay="false" loop crossorigin="anonymous" src="assets/video.mp4" webkit-playsinline playsinline controls muted></video>
     </a-assets>
+	<a-assets>
+      <video id="Video_Asset_1" autoplay="false" loop crossorigin="anonymous" src="assets/video1.mp4" webkit-playsinline playsinline controls muted></video>
+    </a-assets>
+	<a-assets>
+      <video id="Video_Asset_2" autoplay="false" loop crossorigin="anonymous" src="assets/video2.mp4" webkit-playsinline playsinline controls muted></video>
+    </a-assets>
     <a-marker id="marker" preset="hiro" emitevents="true" button>
       <a-video src="#Video_Asset_0" id="Video_0" class="intersectable" width="1" height="1" position="0 0 0" rotation="0 0 0" color="#FFFFFF" transparent=False></a-video>
+    </a-marker>
+	<a-marker id="marker2" preset="kanji" emitevents="true" button>
+      <a-video src="#Video_Asset_0" id="Video_1" class="intersectable" width="1" height="1" position="0 0 0" rotation="0 0 0" color="#FFFFFF" transparent=False></a-video>
+    </a-marker>
+	<a-marker id="marker3" preset='custom' type='pattern' url='assets/marker.patt' emitevents="true" button>
+      <a-video src="#Video_Asset_0" id="Video_2" class="intersectable" width="1" height="1" position="0 0 0" rotation="0 0 0" color="#FFFFFF" transparent=False></a-video>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
