@@ -38,6 +38,7 @@
             markerFound = 0;
 			markerType = 3;
             Video_0.pause();
+			button.innerHTML="Play";
             button.hidden = true;
           });
 		  marker1.addEventListener("markerFound", function (evt) {
@@ -50,7 +51,8 @@
           marker1.addEventListener("markerLost", function (evt) {
             markerFound = 0;
 			markerType = 3;
-            Video_0.pause();
+            Video_1.pause();
+			button.innerHTML="Play";
             button.hidden = true;
           });
 		  marker2.addEventListener("markerFound", function (evt) {
@@ -63,7 +65,8 @@
           marker2.addEventListener("markerLost", function (evt) {
             markerFound = 0;
 			markerType = 3;
-            Video_0.pause();
+            Video_2.pause();
+			button.innerHTML="Play";
             button.hidden = true;
           });
 
