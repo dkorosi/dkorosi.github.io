@@ -1,4 +1,4 @@
-/ based on  https://medium.com/swlh/build-your-location-based-augmented-reality-web-app-a841956eed2c
+// based on  https://medium.com/swlh/build-your-location-based-augmented-reality-web-app-a841956eed2c
 
 window.onload = () => {
     const button = document.querySelector('button[data-action="change"]');
